@@ -17,3 +17,13 @@ response("done",header={key:vale})
 resp = make_response("done")
 
 response.headers["aa"] = "bbb"
+
+request对象
+
+from flask import request
+
+request.path
+request.full_path
+*****
+request.args  -> get请求   http://127.0.0.1/regiester?username=yeuzhang&password=123
+request.form -> Post请求
