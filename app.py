@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import settings
 
 app = Flask(__name__)
 app.config.from_object(settings)
 
 users = []
-@app.route("/")
+@app.route("/",endpoint="index")
 def index():
     return render_template("index.html")
 
@@ -29,7 +29,7 @@ def register():
             users.append(user)
         else:
             return "pass and repass not same"
-        return "local reg successful!"
+        return redirect(url_for("index")) #注意这里并不是函数名字 而是上面路由endpoint的值 endpoint="index" 也可以是 “yuezhang”
     s = render_template("register.html")
     return s
 
@@ -46,6 +46,12 @@ def show():
         s += user["username"]
 
     return s
+
+@app.route("/test")
+def test():
+    url = url_for("index") #映射 反向解析
+    print(url)
+    return "test_URL_FOR"
 
 
 if __name__ == "__main__":
